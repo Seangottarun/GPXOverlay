@@ -1,0 +1,10 @@
+body {
+  /*background-color: rgba(0, 0, 0, 0.1); *//* Sets to 10% transparent*/
+  display: inline-block;
+  width: 775px;
+}
+
+#overlay {
+  background-color: rgba(55, 55, 55, 0.7); /* Semi-transparent Dark Grey */
+  padding: 10px 20px;
+}
