@@ -1,10 +1,11 @@
-"""This module calculates velocity given the latitude, longitude, and time from
+"""This module calculates velocity given the latitude, longitude, and time of
 two different points.
 
 It assumes a perfectly spherical earth and defines the centre of the Earth to be
-the origin of a 3D coordinate space. The location data of each point can then be
-used to construct a 3D vector. Using the dot product and the arc length formula,
-the surface distance between the 2 points can be calculated.
+the origin of a 3D spherical coordinate system. The location of each point
+in spherical coordinates can then be converted to 3D Cartesian coordinates
+to get two 3D position vectors. Then using the dot product and arc length
+formulas, the surface distance between the 2 points can be calculated.
 """
 import math
 import xml.etree.ElementTree as ET
@@ -19,7 +20,8 @@ def calc_position(latitude, longitude):
     and longitude
 
     Args:
-        latitude (float): latitude of the position in degrees North/South of equator
+        latitude (float): latitude of the position in degrees North/South of
+            equator
         longitude (float): longitude of the position in degrees East/West of
             Prime Meridian
 
@@ -68,10 +70,12 @@ def calc_distance(latitude1, longitude1, latitude2, longitude2):
     arc length equaiton is used to calculate distance (assume spherical Earth).
 
     Args:
-        latitude1 (float): latitude of 1st position in degrees North/South of equator
+        latitude1 (float): latitude of 1st position in degrees North/South of
+            equator
         longitude1 (float): longitude of 1st position in degrees East/West of
             Prime Meridian
-        latitude2 (float): latitude of 2nd position in degrees North/South of equator
+        latitude2 (float): latitude of 2nd position in degrees North/South of
+            equator
         longitude2 (float): longitude of 2nd position in degrees East/West of
             Prime Meridian
 
@@ -98,12 +102,14 @@ def calc_velocity(latitude1, longitude1, time1, latitude2, longitude2, time2):
         velocity approaches the instantaneous velocity.
 
     Args:
-        latitude1 (float): latitude of 1st position in degrees North/South of equator
+        latitude1 (float): latitude of 1st position in degrees North/South of
+            equator
         longitude1 (float): longitude of 1st position in degrees East/West of
             Prime Meridian
         time1 (float): elapsed time in seconds since the start of the GPS track
             to the 1st position
-        latitude2 (float): latitude of 2nd position in degrees North/South of equator
+        latitude2 (float): latitude of 2nd position in degrees North/South of
+            equator
         longitude2 (float): longitude of 2nd position in degrees East/West of
             Prime Meridian
         time2 (float): elapsed time in seconds since the start of the GPS track
