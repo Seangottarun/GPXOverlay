@@ -4,17 +4,37 @@ import numpy as np
 from GPXOverlay import calculations
 
 class Analysis:
+    """Processes GPX file to get speed, elevation, and other data
+
+    Attributes:
+        gpx_data (str): Path to GPX file
+        num_gps_points (int): Number of recorded GPS points (number of track
+            points in track segment)
+        time (ndarray): 1D array containing time measurements with type
+            'datetime64[s]'
+        elevation (ndarray): 1D array containing elevation measurements [m]
+        velocity (ndarray): 1D array containing caculated velocity values [m/s]
+    """
+
     def __init__(self, gpx_file):
+        """ __init__ method for Analysis class
+
+        Args:
+            gpx_file (str): Path to GPX file
+        """
+
+        # import and parse GPX file
         self.gpx_data = gpx_file
-        tree = ET.parse(self.gpx_data) # import xml file
+        tree = ET.parse(self.gpx_data)
         root = tree.getroot()
-
         trkseg = root[1][2]
-        self.num_gps_points = len(trkseg)
 
+        self.num_gps_points = len(trkseg)
         self.time = np.zeros(self.num_gps_points, dtype='datetime64[s]')
+        self.elevation = np.zeros(self.num_gps_points)
         self.velocity = np.zeros(self.num_gps_points - 1)
 
+        # iterate through track points in track segment and perform calculations
         for i in range(len(trkseg)-1):
             trkpt1=trkseg[i]
             trkpt2=trkseg[i+1]
@@ -24,6 +44,9 @@ class Analysis:
             lat2 = float(trkpt2.attrib["lat"])
             long2 = float(trkpt2.attrib["lon"])
 
+            # Gets elevation data from GPX file
+            elevation = trkpt1[0].text
+
             # Gets time element from GPX file (ISO 8601 standard)
             time1 = dateutil.parser.parse(trkpt1[1].text)
             time2 = dateutil.parser.parse(trkpt2[1].text)
@@ -32,17 +55,22 @@ class Analysis:
             v_min_km = calculations.min_km(v_m_s) # min/km
             v_km_h = calculations.km_h(v_m_s) #km/h
 
+            # Store processed values into class variables
             self.time[i] = time1
+            self.elevation[i] = elevation
             self.velocity[i] = v_m_s
 
-
-    def get_velocity_data(self):
+    @property
+    def velocity_data(self):
+        """Gets all calculated velocity values"""
         return self.velocity
-        #print(self.velocity)
-        #print(len(self.velocity))
 
-    def get_time_data(self):
+    @ property
+    def time_data(self):
+        """Gets all time measurments"""
         return self.time
 
-    def get_positions(self):
-        print(self.position)
+    @property
+    def elevation_data(self):
+        """Gets all elevation measurements"""
+        return self.elevation
