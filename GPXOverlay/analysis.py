@@ -30,9 +30,9 @@ class Analysis:
         trkseg = root[1][2]
 
         self.num_gps_points = len(trkseg)
-        self.time = np.zeros(self.num_gps_points, dtype='datetime64[s]')
-        self.elevation = np.zeros(self.num_gps_points)
-        self.velocity = np.zeros(self.num_gps_points - 1)
+        self.time = np.full(self.num_gps_points, np.datetime64("NaT"), dtype='datetime64[s]')
+        self.elevation = np.full(self.num_gps_points, np.nan)
+        self.velocity = np.full(self.num_gps_points - 1, np.nan)
 
         # iterate through track points in track segment and perform calculations
         for i in range(len(trkseg)-1):
@@ -51,14 +51,21 @@ class Analysis:
             time1 = dateutil.parser.parse(trkpt1[1].text)
             time2 = dateutil.parser.parse(trkpt2[1].text)
 
-            v_m_s = calculations.calc_velocity(lat1, long1, time1, lat2, long2, time2) # m/s
-            v_min_km = calculations.min_km(v_m_s) # min/km
-            v_km_h = calculations.km_h(v_m_s) #km/h
+            # Only process and store uniue values into class variables.
+            # Sometimes there will be identical values with the same time stamp
+            if time1 != time2:
+                v_m_s = calculations.calc_velocity(lat1, long1, time1, lat2, long2, time2) # m/s
+                v_min_km = calculations.min_km(v_m_s) # min/km
+                v_km_h = calculations.km_h(v_m_s) #km/h
 
-            # Store processed values into class variables
-            self.time[i] = time1
-            self.elevation[i] = elevation
-            self.velocity[i] = v_m_s
+                self.time[i] = time1
+                self.elevation[i] = elevation
+                self.velocity[i] = v_m_s
+
+        # Filter all valid values (not NaN or NaT)
+        self.time = self.time[np.logical_not(np.isnat(self.time))]
+        self.elevation = self.elevation[np.logical_not(np.isnan(self.elevation))]
+        self.velocity = self.velocity[np.logical_not(np.isnan(self.velocity))]
 
     @property
     def velocity_data(self):
