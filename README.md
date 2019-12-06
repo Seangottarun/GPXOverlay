@@ -1,17 +1,21 @@
-# GPS-Overlay
-This is a basic Python project that takes a GPX file (GPS data) and a video and
+# GPXOverlay
+This is a basic Python library that takes a GPX file (GPS data) and a video and
 overlays the GPS data onto individual frames of the video. While there already is
 existing software to overlay GPS data on a video, this project is unique as it
-allows users to ceate their own custom overlay widgets using HTML. As far as I
+allows users to create their own custom overlay widgets using HTML. As far as I
 am aware, no other software provides this customizability.
 
 The project is still in the early stages and features will be continue to be added.
 
-![Cycling Hyperlapse](examples/Cycling-Hyperlapse1.gif)
+Here's some example output of overlaying speed (top left corner) on top of a
+video recorded by a drone.
+
+![Speed Overlay](examples/test_speed.gif)
+
 
 ## Main Concept
-The GPS data stored in the GPX file contains many trackpoints containing elevation,
-longitude, and latitude.
+The GPS data stored in the GPX file contains many trackpoints containing
+elevation, longitude, and latitude.
 
 ```xml
 <trkpt lat="43.6394830" lon="-79.3760640">
@@ -26,34 +30,109 @@ longitude, and latitude.
 ```
 
 The GPX file is itself an XML file that uses the [TopoGrafix GPX 1.1 Schema](https://www.topografix.com/gpx/1/1/).
-An example GPX file that I collected during a morning run (exported from Strava) is also
-included in this repository (`sample-data.gpx`).
+I've included some example GPX files that I collected during a morning run or
+made using random data (`sample-data.gpx`, `sample-data-long.gpx`, `sample-data-short.gpx`).
 
 This XML file then needs to be parsed to extract relevant data, before processing
 the data to get speed, distance, etc.
 
 ![Speed Processing](examples/Speed-Processing.gif)
 
-Using the included widgets or user-defined HTML widgets with the GPS data, an image
-can be generated for each trackpoint.
+This can be done in a few lines using the code from this library:
 
-Finally, each generated image can be overlayed over individual frames of the input video
+```python
+# load GPX file into an Analysis object
+data = analysis.Analysis('./examples/sample-data-short.gpx')
+# extract elevation, time, and velocity data as a numpy array of values
+elevations = data.elevation_data
+times = data.time_data
+velocities = data.velocity_data
+```
 
+This can then be used in various ways, such as graphing the data using matplotlib
+(See `examples/analyze_elevation.py` for more detail):
+
+![Elevation Graph](examples/elevation_profile.png)
+
+Overlaying the data onto a video can be done using an `Overlay` object that I've
+built into this library:
+
+```python
+# load GPX file into an Overlay object and provide a path for output video
+elevation_overlay = overlay.Overlay('./examples/sample-data-short.gpx', './examples/video.mp4')
+elevation_overlay.generate_elevation_frames()
+elevation_overlay.convert_elevation_frames_to_video()
+elevation_overlay.overlay_elevation()
+```
+
+![Elevation Overlay](examples/test_elevation.gif)
+
+Once again, examples are provided. See `examples/overlay_elevation.py` and `examples/overlay_speed.py`
+
+**Note:** The elevation data does not correspond with the video because I do not
+have a drone myself and do not have access to a matching set of GPS data and
+footage. If I come across a set of data that I am allowed to use, I will definitely
+update this later.
+
+## Running examples
+Run this command in the main directory
+```shell
+python3 -m examples.overlay_speed.py
+python3 -m examples.overlay_elevation.py
+python3 -m examples.analyze_elevation.py
+```
 
 ## Project Overview & External Libraries Used
-1. Parse XML using `ElementTree`
-2. Process extracted data to get speed, distance, etc
-3. Generate PNG image using processed data and HTML widgets with `BeautifulSoup`
+1. Parse XML using `ElementTree` and use `dateutil.parser` for time related data
+2. Process extracted data to get speed, distance, etc using `numpy`
+3. Use and modify `HTML` templates using `jinja2`
+4. Generate graphs using `matplotlib`
+5. Generate video frames as PNG images using `imgkit` (a python wrapper for `wkhtmltopdf`)
+6. Generate PNG image using processed data and HTML widgets with `BeautifulSoup`
 and `imgkit`
-4. Overlay PNG onto video frames using `ffmpeg`
+7. Convert PNG frames to a single video and overlay the video onto the input video using `ffmpeg-python` (a python wrapper for `FFmpeg`)
 
+**Note:** Currently the process to generate the output video is to convert each
+ overlay image into a video and then overlay that video onto the input video. A
+ more efficient way would be to overlay the image directly onto individual
+ frames of the input video. I went with the current approach because it was the
+ easiest to prototype and didn't require any complicated logic when using the
+ `ffmpeg-python` library. While this method is slower, it ultimately doesn't add
+ too much time to the overall process because `ffmpeg-python` is very fast. The
+ time limiting step is actually generating each frame. Reading and modifying the
+ HTML, as well as generating the image, was much slower than I anticipated, but
+ I guess that's a lesson learned for next time.
 
-## To Be Completed for MVP
-1. Video frame-by-frame overlay code
-2. HTML overlays
-- speed
-- elevation
-- distance
+## Project Structure
+```
+├── GPXOverlay
+│   ├── __init__.py
+│   ├── analysis.py
+│   ├── calculations.py
+│   ├── frame.py
+│   ├── overlay.py
+│   ├── static
+│   │   ├── elevation_template.css
+│   │   └── speed_template.css
+│   └── templates
+│       ├── elevation_template.html
+│       └── speed_template.html
+├── README.md
+└── examples
+    ├── analyze_elevation.py
+    ├── overlay_elevation.py
+    ├── overlay_speed.py
+    ├── sample-data-long.gpx
+    ├── sample-data-short.gpx
+    └── video.mp4
+```
+
+## TODO
+1. Set up default templates
+2. Set up interpolation
+3. Add intermediate progress bar and/or status info when running library in terminal
+4. Add error messages and exceptions to handle edge cases
+
 
 ## Features to add later
 1. Support for videos w/ different frame rates (sped up, slowmotion, hyperlapses)
@@ -85,6 +164,8 @@ While the clips below from my triathlon training are all filmed POV, this projec
 could definitely be used with any type of video. I just happen to record mostly
 POV and haven't gotten any good examples. Anyways, thanks for reading through this
 and if you have any comments, I'd love to hear them!
+
+![Cycling Hyperlapse](examples/Cycling-Hyperlapse1.gif)
 
 ![Running Hyperlapse](examples/Running-Hyperlapse.gif)
 
