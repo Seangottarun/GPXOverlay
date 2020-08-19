@@ -13,6 +13,28 @@ video recorded by a drone.
 ![Speed Overlay](examples/test_speed.gif)
 
 
+## Installation
+### macOS
+1. Setup a virtual environment
+
+```bash
+python3 -m venv env
+source env/bin/activate
+```
+
+2. From the main directory, install `GPXOverlay` as an editable local pip package
+
+```bash
+pip3 install -e .
+```
+
+3. Install `wkhtmltopdf` and `ffmpeg` dependencies
+
+```bash
+brew cask install wkhtmltopdf
+brew install ffmpeg
+```
+
 ## Main Concept
 The GPS data stored in the GPX file contains many trackpoints containing
 elevation, longitude, and latitude.
