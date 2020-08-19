@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import dateutil.parser
 import imgkit
 import numpy as np
+import os
 
 from GPXOverlay import frame
 from GPXOverlay import calculations
@@ -28,6 +29,9 @@ class Overlay():
         """
         self.video = input_video
         self.gpx_data = gpx_data
+
+        if not os.path.exists('temp'):
+            os.makedirs('temp')
 
     def generate_overlay_frames(self):
         """Generates all overlay frames using velocity and time data"""
