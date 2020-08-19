@@ -32,7 +32,7 @@ def generate_png(speed, time, id):
     output_from_parsed_template = template.render(speed=speed,time=time)
 
     # Save modified template in temporary HTML file
-    with open("temp/updated_speed.html", "w") as new_html_file:
+    with open("temp/updated_speed.html", "w+") as new_html_file:
         new_html_file.write(output_from_parsed_template)
 
     # Use imgkit to generate png from temporary HTML file
