@@ -64,7 +64,7 @@ This can be done in a few lines using the code from this library:
 
 ```python
 # load GPX file into an Analysis object
-data = analysis.Analysis('./examples/sample-data-short.gpx')
+data = analysis.Analysis('sample-data-short.gpx')
 # extract elevation, time, and velocity data as a numpy array of values
 elevations = data.elevation_data
 times = data.time_data
@@ -81,7 +81,7 @@ built into this library:
 
 ```python
 # load GPX file into an Overlay object and provide a path for output video
-elevation_overlay = overlay.Overlay('./examples/sample-data-short.gpx', './examples/video.mp4')
+elevation_overlay = overlay.Overlay('sample-data-short.gpx', 'video.mp4')
 elevation_overlay.generate_elevation_frames()
 elevation_overlay.convert_elevation_frames_to_video()
 elevation_overlay.overlay_elevation()
@@ -99,9 +99,10 @@ update this later.
 ## Running examples
 Run this command in the main directory
 ```shell
-python3 -m examples.overlay_speed.py
-python3 -m examples.overlay_elevation.py
-python3 -m examples.analyze_elevation.py
+cd examples
+python3 overlay_speed.py
+python3 overlay_elevation.py
+python3 analyze_elevation.py
 ```
 
 ## Project Overview & External Libraries Used

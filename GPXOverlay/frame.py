@@ -5,13 +5,14 @@ import jinja2
 import matplotlib.pyplot as plt
 import math
 import numpy as np
+import os
 
 # relative project paths to HTML and CSS templates
-SPEED_HTML = "./GPXOverlay/templates/speed_template.html"
-SPEED_CSS = './GPXOverlay/static/speed_template.css'
+SPEED_HTML_FILE_NAME = "./speed_template.html"
+SPEED_CSS_PATH = os.path.join(os.path.dirname(__file__), 'static/speed_template.css')
 
-ELEVATION_HTML = "./GPXOverlay/templates/elevation_template.html"
-ELEVATION_CSS = './GPXOverlay/static/elevation_template.css'
+ELEVATION_HTML_PATH = os.path.join(os.path.dirname(__file__), 'templates/elevation_template.html')
+ELEVATION_CSS_PATH = os.path.join(os.path.dirname(__file__), 'static/elevation_template.css')
 
 def generate_png(speed, time, id):
     """Generates a single frame as a png using the instantaneous speed and time
@@ -25,9 +26,12 @@ def generate_png(speed, time, id):
 
     """
     # Load template using jinja2
-    templateLoader = jinja2.FileSystemLoader(searchpath="./")
+    # jinja2 looks for files inside the specified template directory, so pass
+    # the file name rather than a path
+    templateLoader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates/'))
     templateEnv = jinja2.Environment(loader=templateLoader)
-    template = templateEnv.get_template(SPEED_HTML)
+    template = templateEnv.get_template(SPEED_HTML_FILE_NAME)
+
     # Modify template with instantaneous speed and time
     output_from_parsed_template = template.render(speed=speed,time=time)
 
@@ -37,7 +41,7 @@ def generate_png(speed, time, id):
 
     # Use imgkit to generate png from temporary HTML file
     options = {'quiet': '', 'transparent': '', 'width': 500, "crop-w":500, 'disable-smart-width': ''} # turn off intermediate status notifications
-    imgkit.from_file('temp/updated_speed.html', f'temp/speed{id}.png', options=options, css=SPEED_CSS) # output image to location w/ fstring
+    imgkit.from_file('temp/updated_speed.html', f'temp/speed{id}.png', options=options, css=SPEED_CSS_PATH) # output image to location w/ fstring
 
 
 def graph_elevation(time, elevation, size, avg, y_min, y_max):
@@ -99,4 +103,4 @@ def generate_elevation_frame(id):
     """
     # Use imgkit to generate png from HTML template
     options = {'quiet': '', 'transparent': '', 'width':775, 'height': 775, "crop-w":775, 'disable-smart-width': ''} # turn off intermediate status notifications
-    imgkit.from_file(ELEVATION_HTML, f'temp/elevation{id}.png', options=options) # output image to location w/ fstring
+    imgkit.from_file(ELEVATION_HTML_PATH, f'temp/elevation{id}.png', options=options) # output image to location w/ fstring

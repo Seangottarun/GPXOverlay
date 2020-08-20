@@ -6,7 +6,7 @@ import imgkit
 
 def main():
     # load GPX file into an Analysis object and graph data
-    data = analysis.Analysis('./examples/sample-data-short.gpx')
+    data = analysis.Analysis('sample-data-short.gpx')
     ele = data.elevation_data
     fig, ax = plt.subplots()
     ax.plot(ele, color='#2d89ef')
