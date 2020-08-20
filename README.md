@@ -35,6 +35,27 @@ brew cask install wkhtmltopdf
 brew install ffmpeg
 ```
 
+### Windows
+1. Setup a virtual environment
+
+```powershell
+python -m venv env
+.\env\Scripts\Activate.ps1
+```
+
+2. From the main directory, install `GPXOverlay` as an editable local pip package
+
+```powershell
+pip install -e .
+```
+
+3. Install `wkhtmltopdf` and `ffmpeg` dependencies
+
+```powershell
+choco install wkhtmltopdf
+choco install ffmpeg
+```
+
 ## Main Concept
 The GPS data stored in the GPX file contains many trackpoints containing
 elevation, longitude, and latitude.
