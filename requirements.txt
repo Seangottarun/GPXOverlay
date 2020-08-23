@@ -1,0 +1,6 @@
+numpy
+jinja2
+matplotlib
+imgkit
+beautifulsoup4
+ffmpeg-python

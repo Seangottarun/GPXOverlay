@@ -13,6 +13,49 @@ video recorded by a drone.
 ![Speed Overlay](examples/test_speed.gif)
 
 
+## Installation
+### macOS
+1. Setup a virtual environment
+
+```bash
+python3 -m venv env
+source env/bin/activate
+```
+
+2. From the main directory, install `GPXOverlay` as an editable local pip package
+
+```bash
+pip3 install -e .
+```
+
+3. Install `wkhtmltopdf` and `ffmpeg` dependencies
+
+```bash
+brew cask install wkhtmltopdf
+brew install ffmpeg
+```
+
+### Windows
+1. Setup a virtual environment
+
+```powershell
+python -m venv env
+.\env\Scripts\Activate.ps1
+```
+
+2. From the main directory, install `GPXOverlay` as an editable local pip package
+
+```powershell
+pip install -e .
+```
+
+3. Install `wkhtmltopdf` and `ffmpeg` dependencies
+
+```powershell
+choco install wkhtmltopdf
+choco install ffmpeg
+```
+
 ## Main Concept
 The GPS data stored in the GPX file contains many trackpoints containing
 elevation, longitude, and latitude.
@@ -42,7 +85,7 @@ This can be done in a few lines using the code from this library:
 
 ```python
 # load GPX file into an Analysis object
-data = analysis.Analysis('./examples/sample-data-short.gpx')
+data = analysis.Analysis('sample-data-short.gpx')
 # extract elevation, time, and velocity data as a numpy array of values
 elevations = data.elevation_data
 times = data.time_data
@@ -59,7 +102,7 @@ built into this library:
 
 ```python
 # load GPX file into an Overlay object and provide a path for output video
-elevation_overlay = overlay.Overlay('./examples/sample-data-short.gpx', './examples/video.mp4')
+elevation_overlay = overlay.Overlay('sample-data-short.gpx', 'video.mp4')
 elevation_overlay.generate_elevation_frames()
 elevation_overlay.convert_elevation_frames_to_video()
 elevation_overlay.overlay_elevation()
@@ -77,9 +120,10 @@ update this later.
 ## Running examples
 Run this command in the main directory
 ```shell
-python3 -m examples.overlay_speed.py
-python3 -m examples.overlay_elevation.py
-python3 -m examples.analyze_elevation.py
+cd examples
+python3 overlay_speed.py
+python3 overlay_elevation.py
+python3 analyze_elevation.py
 ```
 
 ## Project Overview & External Libraries Used
