@@ -4,3 +4,4 @@ matplotlib
 imgkit
 beautifulsoup4
 ffmpeg-python
+scipy

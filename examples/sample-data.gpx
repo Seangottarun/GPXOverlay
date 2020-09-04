@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Sean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata><bounds minlat="43.638486999999998" minlon="-79.383814999999998" maxlat="43.656914000000000" maxlon="-79.374593000000004"/></metadata>
+<trk>
+  <name>Sample Drone Data</name>
+  <type>9</type>
+  <trkseg>
+    <trkpt lat="43.65513" lon="-79.379793">
+      <ele>290.6666667</ele>
+      <time>2019-09-21T11:12:40Z</time>
+      <extensions>
+        <ogr:X>-79.379793</ogr:X>
+        <ogr:Y>43.65513</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.655085" lon="-79.379763">
+      <ele>291.3333333</ele>
+      <time>2019-09-21T11:12:41Z</time>
+      <extensions>
+        <ogr:X>-79.379763</ogr:X>
+        <ogr:Y>43.655085</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.655046" lon="-79.379729">
+      <ele>292.6666667</ele>
+      <time>2019-09-21T11:12:42Z</time>
+      <extensions>
+        <ogr:X>-79.379729</ogr:X>
+        <ogr:Y>43.655046</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.655008" lon="-79.379696">
+      <ele>292.6666667</ele>
+      <time>2019-09-21T11:12:43Z</time>
+      <extensions>
+        <ogr:X>-79.379696</ogr:X>
+        <ogr:Y>43.655008</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654971" lon="-79.379671">
+      <ele>293.3333333</ele>
+      <time>2019-09-21T11:12:44Z</time>
+      <extensions>
+        <ogr:X>-79.379671</ogr:X>
+        <ogr:Y>43.654971</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654932" lon="-79.379652">
+      <ele>293.3333333</ele>
+      <time>2019-09-21T11:12:45Z</time>
+      <extensions>
+        <ogr:X>-79.379652</ogr:X>
+        <ogr:Y>43.654932</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654891" lon="-79.379635">
+      <ele>297.3333333</ele>
+      <time>2019-09-21T11:12:46Z</time>
+      <extensions>
+        <ogr:X>-79.379635</ogr:X>
+        <ogr:Y>43.654891</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654846" lon="-79.37962">
+      <ele>295.3333333</ele>
+      <time>2019-09-21T11:12:47Z</time>
+      <extensions>
+        <ogr:X>-79.37962</ogr:X>
+        <ogr:Y>43.654846</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654777" lon="-79.3796">
+      <ele>295.3333333</ele>
+      <time>2019-09-21T11:12:48Z</time>
+      <extensions>
+        <ogr:X>-79.3796</ogr:X>
+        <ogr:Y>43.654777</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654696" lon="-79.379572">
+      <ele>295.3333333</ele>
+      <time>2019-09-21T11:12:49Z</time>
+      <extensions>
+        <ogr:X>-79.379572</ogr:X>
+        <ogr:Y>43.654696</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654606" lon="-79.379543">
+      <ele>296.6666667</ele>
+      <time>2019-09-21T11:12:50Z</time>
+      <extensions>
+        <ogr:X>-79.379543</ogr:X>
+        <ogr:Y>43.654606</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654526" lon="-79.379519">
+      <ele>296.6666667</ele>
+      <time>2019-09-21T11:12:51Z</time>
+      <extensions>
+        <ogr:X>-79.379519</ogr:X>
+        <ogr:Y>43.654526</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.65446" lon="-79.379496">
+      <ele>297.3333333</ele>
+      <time>2019-09-21T11:12:52Z</time>
+      <extensions>
+        <ogr:X>-79.379496</ogr:X>
+        <ogr:Y>43.65446</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654401" lon="-79.379473">
+      <ele>305.3333333</ele>
+      <time>2019-09-21T11:12:53Z</time>
+      <extensions>
+        <ogr:X>-79.379473</ogr:X>
+        <ogr:Y>43.654401</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654355" lon="-79.379447">
+      <ele>298.6666667</ele>
+      <time>2019-09-21T11:12:54Z</time>
+      <extensions>
+        <ogr:X>-79.379447</ogr:X>
+        <ogr:Y>43.654355</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654312" lon="-79.379421">
+      <ele>298.6666667</ele>
+      <time>2019-09-21T11:12:55Z</time>
+      <extensions>
+        <ogr:X>-79.379421</ogr:X>
+        <ogr:Y>43.654312</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654274" lon="-79.379404">
+      <ele>299.3333333</ele>
+      <time>2019-09-21T11:12:56Z</time>
+      <extensions>
+        <ogr:X>-79.379404</ogr:X>
+        <ogr:Y>43.654274</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654248" lon="-79.379387">
+      <ele>299.3333333</ele>
+      <time>2019-09-21T11:12:57Z</time>
+      <extensions>
+        <ogr:X>-79.379387</ogr:X>
+        <ogr:Y>43.654248</ogr:Y>
+      </extensions>
+    </trkpt>
+    <trkpt lat="43.654224" lon="-79.379378">
+      <ele>300.0</ele>
+      <time>2019-09-21T11:12:58Z</time>
+      <extensions>
+        <ogr:X>-79.379378</ogr:X>
+        <ogr:Y>43.654224</ogr:Y>
+      </extensions>
+    </trkpt>
+  </trkseg>
+</trk>
+</gpx>
